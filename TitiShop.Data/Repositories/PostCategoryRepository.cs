@@ -3,11 +3,11 @@ using TitiShop.Model.Models;
 
 namespace TitiShop.Data.Repositories
 {
-    public interface IPostCategoryRepository
+    public interface IPostCategoryRepository : IRepository<PostCategory>
     {
     }
 
-    public class PostCategoryRepository : RepositoryBase<Page>, IPostCategoryRepository
+    public class PostCategoryRepository : RepositoryBase<PostCategory>, IPostCategoryRepository
     {
         public PostCategoryRepository(DbFactory dbFactory) : base(dbFactory)
         {

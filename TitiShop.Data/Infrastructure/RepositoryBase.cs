@@ -49,6 +49,7 @@ namespace TitiShop.Data.Infrastructure
         {
             return dbSet.Remove(entity);
         }
+        
 
         public virtual T Delete(int id)
         {

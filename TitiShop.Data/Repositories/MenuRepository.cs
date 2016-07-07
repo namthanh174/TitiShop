@@ -3,7 +3,7 @@ using TitiShop.Model.Models;
 
 namespace TitiShop.Data.Repositories
 {
-    public interface IMenuRepository
+    public interface IMenuRepository : IRepository<Menu>
     {
     }
 

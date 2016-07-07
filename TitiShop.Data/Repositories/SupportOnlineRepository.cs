@@ -3,11 +3,11 @@ using TitiShop.Model.Models;
 
 namespace TitiShop.Data.Repositories
 {
-    public interface ISupportOnlineRepository
+    public interface ISupportOnlineRepository : IRepository<SupportOnline>
     {
     }
 
-    public class SupportOnlineRepository : RepositoryBase<Page>, ISupportOnlineRepository
+    public class SupportOnlineRepository : RepositoryBase<SupportOnline>, ISupportOnlineRepository
     {
         public SupportOnlineRepository(DbFactory dbFactory) : base(dbFactory)
         {

@@ -3,7 +3,7 @@ using TitiShop.Model.Models;
 
 namespace TitiShop.Data.Repositories
 {
-    public interface IPageRepository
+    public interface IPageRepository : IRepository<Page>
     {
     }
 
