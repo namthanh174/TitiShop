@@ -26,7 +26,9 @@ namespace TitiShop.Model.Models
         [MaxLength(250)]
         public string Image { set; get; }
 
-        public XElement MoreImage { set; get; }
+        [Column(TypeName ="xml")]
+        public string MoreImage { set; get; }
+
         public decimal Price { set; get; }
 
         public decimal? PromotionPrice { set; get; }
