@@ -45,8 +45,6 @@ namespace TitiShop.Model.Models
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { set; get; }
 
-        public virtual IEnumerable<OrderDetail> OrderDetails { set; get; }
-
-        public virtual IEnumerable<ProductTag> ProductTags { set; get; }
+        
     }
 }

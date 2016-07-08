@@ -13,7 +13,7 @@ namespace TitiShop.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201607070710420_InitialDB"; }
+            get { return "201607080822178_InitialDB"; }
         }
         
         string IMigrationMetadata.Source
