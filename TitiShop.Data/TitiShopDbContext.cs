@@ -1,9 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 using TitiShop.Model.Models;
 
 namespace TitiShop.Data
 {
-    public class TitiShopDbContext : DbContext
+    public class TitiShopDbContext : IdentityDbContext<ApplicationUser>
     {
         public TitiShopDbContext() : base("TitiShopConnection")
         {
@@ -29,8 +30,16 @@ namespace TitiShop.Data
         public DbSet<VisitorStatistic> VisitorStatistics { set; get; }
         public DbSet<Error> Errors { set; get; }
 
+        public static TitiShopDbContext Create()
+        {
+            return new TitiShopDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder builder)
         {
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId });
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId);
+
         }
     }
 }
