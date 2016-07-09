@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,8 @@ using System.Web.Http;
 using TitiShop.Model.Models;
 using TitiShop.Service;
 using TitiShop.Web.Infrastructure.Core;
+using TitiShop.Web.Infrastructure.Extensions;
+using TitiShop.Web.Models;
 
 namespace TitiShop.Web.Api
 {
@@ -23,26 +26,34 @@ namespace TitiShop.Web.Api
         [Route("getall")]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
-            return CreateHttpResponse(request, () => {
+            return CreateHttpResponse(request, () =>
+            {
 
-                    var listCategory = _postCategoryService.GetAll();
+                var listCategory = _postCategoryService.GetAll();
+                var listPostCategoryVM = Mapper.Map<List<PostCategoryViewModel>>(listCategory);
 
-                    HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
-                
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listPostCategoryVM);
+
                 return response;
             });
         }
 
-        public HttpResponseMessage Post(HttpRequestMessage request,PostCategory postCategory)
+
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
-            return CreateHttpResponse(request,()=> {
+            return CreateHttpResponse(request, () =>
+            {
                 HttpResponseMessage response = null;
                 if (ModelState.IsValid)
                 {
                     request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }else
+                }
+                else
                 {
-                    var category =  _postCategoryService.Add(postCategory);
+                    PostCategory newPostCategory = new PostCategory();
+                    newPostCategory.UpdatePostCategory(postCategoryVM);
+                    var category = _postCategoryService.Add(newPostCategory);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.Created, category);
@@ -51,9 +62,12 @@ namespace TitiShop.Web.Api
             });
         }
 
-        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
-            return CreateHttpResponse(request, () => {
+            return CreateHttpResponse(request, () =>
+            {
                 HttpResponseMessage response = null;
                 if (ModelState.IsValid)
                 {
@@ -61,7 +75,9 @@ namespace TitiShop.Web.Api
                 }
                 else
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryVM.ID);
+                    postCategoryDb.UpdatePostCategory(postCategoryVM);
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.Save();
 
                     response = request.CreateResponse(HttpStatusCode.OK);
@@ -72,7 +88,8 @@ namespace TitiShop.Web.Api
 
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
-            return CreateHttpResponse(request, () => {
+            return CreateHttpResponse(request, () =>
+            {
                 HttpResponseMessage response = null;
                 if (ModelState.IsValid)
                 {
@@ -89,6 +106,6 @@ namespace TitiShop.Web.Api
             });
         }
 
-        
+
     }
 }
