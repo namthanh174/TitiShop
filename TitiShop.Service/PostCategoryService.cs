@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TitiShop.Data.Infrastructure;
 using TitiShop.Data.Repositories;
 using TitiShop.Model.Models;
@@ -18,6 +19,7 @@ namespace TitiShop.Service
         IEnumerable<PostCategory> GetAllByParentId(int parentId);
 
         PostCategory GetById(int id);
+        void Save();
     }
 
     public class PostCategoryService : IPostCategoryService
@@ -54,6 +56,11 @@ namespace TitiShop.Service
         public PostCategory GetById(int id)
         {
             return _postCategoryRepository.GetSingleById(id);
+        }
+
+        public void Save()
+        {
+            _unitOfWork.Commit();
         }
 
         public void Update(PostCategory postCategory)
