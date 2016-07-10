@@ -1,7 +1,12 @@
 ﻿/// <reference path="D:\Resource Web\ASP MVC\TitiShop\git\TitiShop.Web\Assets/admin/libs/angular/angular.js" />
 
 (function () {
-    angular.module('titishop', ['titishop.products', 'titishop.common']).config(config);
+    angular.module('titishop', [
+        'titishop.product_categories',
+        'titishop.products',
+        'titishop.common'
+    ])
+        .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
