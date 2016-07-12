@@ -1,4 +1,4 @@
 ﻿
 (function () {
-    angular.module('titishop.common', ['ui.router']);
+    angular.module('titishop.common', ['ui.router','ngBootbox']);
 })();
