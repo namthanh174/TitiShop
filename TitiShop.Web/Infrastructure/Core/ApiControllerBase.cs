@@ -20,12 +20,12 @@ namespace TitiShop.Web.Infrastructure.Core
             this._errorService = errorService;
         }
 
-        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> func)
+        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
             HttpResponseMessage response = null;
             try
             {
-                response = func.Invoke();
+                response = function.Invoke();
             }
             catch (DbEntityValidationException ex)
             {

@@ -77,5 +77,34 @@ namespace TitiShop.Web.Infrastructure.Extensions
 
 
         }
+
+
+        public static void UpdateProduct(this Product product, ProductViewModel productVM)
+        {
+
+            product.ID = productVM.ID;
+            product.Name = productVM.Name;
+            product.Alias = productVM.Alias;
+            product.Description = productVM.Description;
+            product.CategoryID = productVM.CategoryID;
+            product.Image = productVM.Image;
+            product.MoreImage = productVM.MoreImage;
+            product.Price = productVM.Price;
+            product.PromotionPrice = productVM.PromotionPrice;
+            product.Warranty = productVM.Warranty;
+            product.Content = productVM.Content;
+            product.HotFlag = productVM.HotFlag;
+            product.ViewCount = productVM.ViewCount;
+            product.HomeFlag = productVM.HomeFlag;
+
+            product.CreatedDate = productVM.CreatedDate;
+            product.CreateBy = productVM.CreateBy;
+            product.UpdatedDate = productVM.UpdatedDate;
+            product.UpdatedBy = productVM.UpdatedBy;
+            product.MetaKeyword = productVM.MetaKeyword;
+            product.MetaDescription = productVM.MetaDescription;
+            product.Status = productVM.Status;
+
+        }
     }
 }
