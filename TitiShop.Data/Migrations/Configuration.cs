@@ -17,7 +17,7 @@
 
         protected override void Seed(TitiShop.Data.TitiShopDbContext context)
         {
-            CreateProductSample(context);
+            //CreateProductSample(context);
             //CreateProductCategorySample(context);
 
             //  This method will be called after migrating to the latest version.
@@ -68,22 +68,24 @@
         //}
 
 
-        private void CreateProductSample(TitiShop.Data.TitiShopDbContext context)
-        {
-            if (context.Products.Count() == 0)
-            {
-                List<Product> listProduct = new List<Product>() {
-                new Product() {Name="Iphone 7",Alias="iphone-7",CategoryID=2,Price=500000,Status=true },
-                new Product() {Name="Samsung s6",Alias="samsung-s6",CategoryID=2,Price=700000,Status=true },
-                new Product() {Name="Iphone 5",Alias="iphone-5",CategoryID=2,Price=800000,Status=true },
-                new Product() {Name="Nokia x7",Alias="nokia-x7",CategoryID=2,Price=1200000,Status=true }
-            };
+        //private void CreateProductSample(TitiShop.Data.TitiShopDbContext context)
+        //{
+        //    if (context.Products.Count() == 0)
+        //    {
+        //        List<Product> listProduct = new List<Product>() {
+        //        new Product() {Name="Iphone 7",Alias="iphone-7",CategoryID=2,Price=500000,Status=true },
+        //        new Product() {Name="Samsung s6",Alias="samsung-s6",CategoryID=2,Price=700000,Status=true },
+        //        new Product() {Name="Iphone 5",Alias="iphone-5",CategoryID=2,Price=800000,Status=true },
+        //        new Product() {Name="Nokia x7",Alias="nokia-x7",CategoryID=2,Price=1200000,Status=true }
+        //    };
 
-                context.Products.AddRange(listProduct);
-                context.SaveChanges();
-            }
+        //        context.Products.AddRange(listProduct);
+        //        context.SaveChanges();
+        //    }
+
+        //}
 
 
-        }
+
     }
 }

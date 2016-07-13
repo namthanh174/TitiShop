@@ -96,6 +96,7 @@ namespace TitiShop.Web.Infrastructure.Extensions
             product.HotFlag = productVM.HotFlag;
             product.ViewCount = productVM.ViewCount;
             product.HomeFlag = productVM.HomeFlag;
+            product.Tags = productVM.Tags;
 
             product.CreatedDate = productVM.CreatedDate;
             product.CreateBy = productVM.CreateBy;
