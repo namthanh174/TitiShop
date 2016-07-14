@@ -14,6 +14,7 @@ using TitiShop.Web.Models;
 namespace TitiShop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
+    [Authorize]
     public class PostCategoryController : ApiControllerBase
     {
         IPostCategoryService _postCategoryService;

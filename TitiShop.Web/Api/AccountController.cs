@@ -52,7 +52,6 @@ namespace TitiShop.Web.Api
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("login")]
         public async Task<HttpResponseMessage> Login(HttpRequestMessage request, string username, string password, bool rememberMe)
         {

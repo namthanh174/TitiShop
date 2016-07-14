@@ -15,6 +15,7 @@ using TitiShop.Web.Models;
 namespace TitiShop.Web.Api
 {
     [RoutePrefix("api/productcategory")]
+    [Authorize]
     public class ProductCategoryController : ApiControllerBase
     {
         #region Initialize
@@ -108,6 +109,7 @@ namespace TitiShop.Web.Api
                     var newProductCategory = new ProductCategory();
                     newProductCategory.UpdateProductCategory(productCategoryVM);
                     newProductCategory.CreatedDate = DateTime.Now;
+                    newProductCategory.CreateBy = User.Identity.Name;
                     _productCategoryService.Add(newProductCategory);
                     _productCategoryService.Save();
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(newProductCategory);
@@ -138,6 +140,7 @@ namespace TitiShop.Web.Api
                     var dbProductCategory = _productCategoryService.GetById(productCategoryVM.ID);
                     dbProductCategory.UpdateProductCategory(productCategoryVM);
                     dbProductCategory.UpdatedDate = DateTime.Now;
+                    dbProductCategory.UpdatedBy = User.Identity.Name;
 
                     _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.Save();

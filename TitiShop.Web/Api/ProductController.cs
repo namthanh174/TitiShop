@@ -15,6 +15,7 @@ using TitiShop.Web.Models;
 namespace TitiShop.Web.Api
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initialize
@@ -31,7 +32,6 @@ namespace TitiShop.Web.Api
 
         [Route("getall")]
         [HttpGet]
-        [AllowAnonymous]
         public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
@@ -62,7 +62,6 @@ namespace TitiShop.Web.Api
 
         [Route("getbyid/{id:int}")]
         [HttpGet]
-        [AllowAnonymous]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -95,7 +94,6 @@ namespace TitiShop.Web.Api
 
         [Route("create")]
         [HttpPost]
-        [AllowAnonymous]
         public HttpResponseMessage Create(HttpRequestMessage request, ProductViewModel productVM)
         {
             return CreateHttpResponse(request, () =>
@@ -111,6 +109,7 @@ namespace TitiShop.Web.Api
                     var newProduct = new Product();
                     newProduct.UpdateProduct(productVM);
                     newProduct.CreatedDate = DateTime.Now;
+                    newProduct.CreateBy = User.Identity.Name;
                     _productService.Add(newProduct);
                     _productService.Save();
                     var responseData = Mapper.Map<Product, ProductViewModel>(newProduct);
@@ -126,7 +125,6 @@ namespace TitiShop.Web.Api
 
         [Route("update")]
         [HttpPut]
-        [AllowAnonymous]
         public HttpResponseMessage Update(HttpRequestMessage request, ProductViewModel productVM)
         {
             return CreateHttpResponse(request, () =>
@@ -142,6 +140,7 @@ namespace TitiShop.Web.Api
                     var dbProduct = _productService.GetById(productVM.ID);
                     dbProduct.UpdateProduct(productVM);
                     dbProduct.UpdatedDate = DateTime.Now;
+                    dbProduct.UpdatedBy = User.Identity.Name;
 
                     _productService.Update(dbProduct);
                     _productService.Save();
@@ -158,7 +157,6 @@ namespace TitiShop.Web.Api
 
         [Route("delete")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
@@ -188,7 +186,6 @@ namespace TitiShop.Web.Api
 
         [Route("deletemulti")]
         [HttpDelete]
-        [AllowAnonymous]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
         {
             return CreateHttpResponse(request, () =>
